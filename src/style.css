@@ -1,0 +1,9 @@
+body {
+	background-color: #9c27B0;
+	min-height: 100vh;
+	color: #fff;
+}
+
+div#root {
+	padding-top: 60px;
+}

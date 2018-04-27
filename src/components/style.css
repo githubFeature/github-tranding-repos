@@ -1,0 +1,40 @@
+.has-feedback-custom {
+	position: relative;
+}
+
+.has-feedback-custom .form-control {
+	padding-right: 38px * 1.25;
+}
+
+.form-control-feedback {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	pointer-events: none;
+	z-index: 1000;
+	color: #9c27B0;
+}
+
+input[type="text"].form-control {
+	border: 1px solid #9C27B0;
+	color: #9c27B0;
+}
+
+.form-control:focus {
+    color: #9c27B0;
+    background-color: #fff;
+    border-color: #9c27B0;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgb(176, 0, 206);
+    box-shadow: 0 0 0 0.2rem rgb(176, 0, 206);
+}
+
+a.repo-url, 
+.repo-stars {
+	color: #673AB7;
+}
