@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 
 export default function Header(props) {
 	return (
@@ -11,10 +11,10 @@ export default function Header(props) {
 
 					<div className='text-center mt-5 form-group has-feedback-custom'>
 						<div className='input-group'>
-							<input defaultValue={props.query} className='form-control' type='text' name='search_query' placeholder='Enter your search query' />
+							<input defaultValue={props.query} className='form-control' type='text' name='search_query' placeholder='Search for Github repositories' />
 
-							<span class="form-control-feedback">
-							    <i class="fa fa-search"></i>
+							<span className="form-control-feedback">
+							    <i className="fa fa-search"></i>
 							</span>
 						</div>
 					</div>

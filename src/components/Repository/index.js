@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
+import './style.scss'
 
 class Repository extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		const repo = this.props.repository;
 
@@ -12,9 +9,7 @@ class Repository extends Component {
 			<div className='card'>
 				<div className='card-header d-flex'>
 					<a href={repo.html_url} className='repo-url'>
-						<h5>
-							{repo.name}
-						</h5>
+						<h5>{repo.name}</h5>
 					</a>
 
 					<h5 className='ml-auto repo-stars'><i className='fa fa-star'></i> {repo.stargazers_count} </h5>

@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import GithubReposList from './GithubReposList'
-import Header from './GithubReposList/Header'
+import RepositoryList from '../RepositoryList'
+import Header from '../Header'
 import request from 'request'
 import 'bootstrap/dist/css/bootstrap.css'
-import './style.css'
+import './style.scss'
 
 var repos = [];
-const WAIT_INTERVAL = 1000;
+var timer = null;
 
 class App extends Component {
 	constructor(props) {
@@ -21,50 +21,51 @@ class App extends Component {
 	}
 
 	loadRepos(queryString) {
-		console.log('loading repos...');
+		console.log('TEMP: Getting Repositories...');
 
 		var promise = new Promise((resolve, reject) => {
 			setTimeout(() => {
-				let url = 'https://api.github.com/search/repositories?q=' + queryString + '&sort=stars';
+				let url = 'https://api.github.com/search/repositories?q=' + queryString + '&sort=stars'
 
 				request(url, (error, response, body) => {
-				    if (error) console.log(error);
-				    else resolve(body);
-				});
-			}, 300);
-		});
+				    if (error) console.log('An Error Occured While Getting Repositories: ', error)
+				    else resolve(body)
+				})
+			}, 300)
+		})
 
 		return promise;
 	}
 
 	handleChange(event) {
-		const inputVal = event.target.value;
-		this.setState({queryString: inputVal});
+		const inputVal = event.target.value.trim();
 
-		clearTimeout(this.timer);
+		if (inputVal !== this.state.queryString) {
+			this.setState({queryString: inputVal}, () => {
+				console.log('------ QueryString has changed ------');
 
-		this.timer = setTimeout(() => {
-			this.setState({loading: 'true'});
+				clearTimeout(timer);
 
-			console.log('current query: ', inputVal);
-			
-			this.loadRepos(inputVal).then(result => {
-				let obj = JSON.parse(result);
-				repos = obj.items;
+				timer = setTimeout(() => {
+					this.setState({loading: 'true'});
 
-				this.setState({
-					loading: 'initial'
-				}, () => {
-					console.log('successfully initialized');
-				})
+					console.log('TEMP: Current Query String is: ', inputVal);
+					
+					this.loadRepos(inputVal).then(result => {
+						const response = JSON.parse(result);
+						repos = response.hasOwnProperty('items') ? response.items : repos;
+
+						this.setState({loading: 'false'}, () => {
+							console.log('OK: Finally Received Repositories.');
+						})
+					});
+				}, 1000);
 			});
-
-			
-		}, WAIT_INTERVAL);
-	}
+		}
+	}		
 
 	componentDidMount() {
-		this.timer = null;
+		timer = null;
 	}
 
 	render() {		
@@ -97,10 +98,10 @@ class App extends Component {
 										value={this.state.queryString}
 										onChange={this.handleChange}
 										name='search_query' 
-										placeholder='Search for github repos' />
+										placeholder='Search for Github repositories' />
 
-									<span class="form-control-feedback">
-									    <i class="fa fa-search"></i>
+									<span className="form-control-feedback">
+									  <i className="fa fa-search"></i>
 									</span>
 								</div>
 							</div>
@@ -109,7 +110,7 @@ class App extends Component {
 				</div>
 			
 				<div className='container text-center'>
-					<GithubReposList repositories = {repos} />
+					<RepositoryList repositories = {repos.length !== 0 ? repos : 'empty'} />
 				</div>
 			</div>
 		)

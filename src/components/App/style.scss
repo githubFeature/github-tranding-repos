@@ -1,0 +1,38 @@
+$purple-color: #9C27B0;
+$default-range-px: 38px;
+
+.has-feedback-custom {
+	position: relative;
+
+	input {
+		padding-right: $default-range-px;
+	}
+}
+
+.form-control-feedback {
+	position: absolute;
+	display: block;
+	width: $default-range-px;
+	height: $default-range-px;
+	line-height: $default-range-px;
+	text-align: center;
+	pointer-events: none;
+	color: $purple-color;
+	z-index: 1000;
+	top: 0;
+	right: 0;
+}
+
+input[type="text"].form-control {
+	border: 1px solid $purple-color;
+	color: $purple-color;
+
+	&:focus {
+		color: $purple-color;
+		background-color: #fff;
+		border-color: $purple-color;
+		outline: 0;
+		-webkit-box-shadow: 0 0 0 0.2rem rgb(176, 0, 206);
+		box-shadow: 0 0 0 0.2rem rgb(176, 0, 206);
+	}
+}
