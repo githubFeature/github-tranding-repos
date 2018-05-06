@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './style.scss'
 
 var repos = [];
-var timer = null;
 
 class App extends Component {
 	constructor(props) {
@@ -40,9 +39,9 @@ class App extends Component {
 
 		if (inputVal !== this.state.queryString) {
 			this.setState({queryString: inputVal}, () => {
-				clearTimeout(timer);
+				clearTimeout(this.timer);
 
-				timer = setTimeout(() => {
+				this.timer = setTimeout(() => {
 					this.setState({loading: 'true'});
 					
 					this.loadRepos(inputVal).then(result => {
@@ -59,7 +58,7 @@ class App extends Component {
 	}		
 
 	componentDidMount() {
-		timer = null;
+		this.timer = null;
 	}
 
 	render() {		
