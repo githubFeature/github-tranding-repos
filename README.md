@@ -1,4 +1,4 @@
-# Trading Github Repositories using ReactJS + SASS 
+# Trending Github Repositories using ReactJS + SASS 
 
 Learning React for a couple of days, I created this application just for experience. The app finds GitHub Repositories by some keywords and shows them to the user sorting by stars. 
 
