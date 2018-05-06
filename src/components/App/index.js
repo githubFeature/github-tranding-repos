@@ -21,8 +21,6 @@ class App extends Component {
 	}
 
 	loadRepos(queryString) {
-		console.log('TEMP: Getting Repositories...');
-
 		var promise = new Promise((resolve, reject) => {
 			setTimeout(() => {
 				let url = 'https://api.github.com/search/repositories?q=' + queryString + '&sort=stars'
@@ -42,14 +40,10 @@ class App extends Component {
 
 		if (inputVal !== this.state.queryString) {
 			this.setState({queryString: inputVal}, () => {
-				console.log('------ QueryString has changed ------');
-
 				clearTimeout(timer);
 
 				timer = setTimeout(() => {
 					this.setState({loading: 'true'});
-
-					console.log('TEMP: Current Query String is: ', inputVal);
 					
 					this.loadRepos(inputVal).then(result => {
 						const response = JSON.parse(result);
