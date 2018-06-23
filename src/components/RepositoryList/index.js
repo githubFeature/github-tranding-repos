@@ -3,29 +3,23 @@ import Repository from '../Repository'
 import './style.scss'
 
 export default function RepositoryList(props) {
-
-	if (props.repositories !== 'empty') {
-
+	if (props.repositories !== null) {
 		var repos = [];
 
-		for (var i = 0; i < props.repositories.length; i++) {
-			console.log('Received Repository: ', props.repositories[i].id);
-
-	   	repos.push(
-	   		<li key = {props.repositories[i].id} className='article_item'>
-	   			<Repository repository = {props.repositories[i]} />
+		props.repositories.map((repository) => repos.push(
+				<li key={repository.id} className='article_item'>
+	   			<Repository repository={repository} />
 	   		</li>
-	   	);
-		}
-
+		))
 		return (
 			<ul>{repos}</ul>
 		);
 	}
-
-
+	else if (props.repositories === null) {
+		return (<h2>No matches were found</h2>);
+	}
 	return (
-		<h2> No Matches Were Found </h2>
+		<h2></h2>
 	);
 }
 
